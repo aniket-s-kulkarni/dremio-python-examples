@@ -46,7 +46,6 @@ params.set_socks_proxy(host, port, ...)
 # connect and interact w/ Dremio
 connection = params.connect()
 with connection.cursor() as cursor:
-    cursor.execute(....)
-    for row in cursor:
-        ....
+    while row := cursor.execute(....):
+        .... # use row
 ```

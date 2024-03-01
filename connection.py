@@ -11,8 +11,8 @@ class DriverType(enum.Enum):
     ADBC = "grpc+tls://"
 
 class Region(enum.Enum):
-    NA = "prod"
-    EU = "prodemea"
+    NA = ""
+    EU = "prodemea."
 
 class ConnectionParams(dict):
     def __init__(self, uri: str, **kw):
@@ -32,19 +32,19 @@ class JdbcConnectionParams(ConnectionParams):
 
     def __init__(self, region: Region, token: str, token_type: TokenType, project_id: str,
                  driver_jar: pathlib.Path, ssl=True, disableVerification=False):
-        uri = f'{DriverType.JDBC.value}sql.{region.value}.dremio.cloud:443' 
+        uri = f'{DriverType.JDBC.value}sql.{region.value}dremio.cloud:443' 
         if not driver_jar.is_file():
             raise FileNotFoundError(driver_jar)
         self.jar = driver_jar
-        super().__init__(uri, username='$token', password=token, ssl=ssl,
-                         disableCertificationVerification=disableVerification,
+        super().__init__(uri, username='$token', password=token, ssl='true' if ssl else 'false',
+                         disableCertificateVerification='true' if disableVerification else 'false',
                          token_type=token_type.value)
     
     def classname(self):
         return 'com.dremio.jdbc.Driver'
     
     def connect(self) -> jaydebeapi.Connection:
-        return jaydebeapi.connect(self.classname(), self.uri, params=self, jars=[self.jar])
+        return jaydebeapi.connect(self.classname(), self.uri, self, jars=[str(self.jar)])
 
     def set_socks_proxy(self, host: str, port: int, username: str=None, password: str=None):
         self['socksProxyHost'] = host
