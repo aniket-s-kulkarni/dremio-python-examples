@@ -44,3 +44,24 @@ with connection.cursor() as cursor:
     while row := cursor.execute(....):
         .... # use row
 ```
+
+### ADBC
+
+Ensure that [a PAT](https://docs.dremio.com/cloud/security/authentication/personal-access-token/#creating-a-token) has been generated
+
+```python
+import connection
+params = connection.AdbcConnectionParams(
+    connection.Region.NA,
+    pat=.... # the PAT
+)
+conn = params.connect()
+with conn.cursor() as cur:
+    ...
+```
+
+Or integrate directly with pandas (Refer to [Examples](Examples.ipynb) for more details)
+
+## Notebook
+
+Refer to [Examples](Examples.ipynb) for more details

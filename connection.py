@@ -62,7 +62,7 @@ class AdbcConnectionParams(ConnectionParams):
         uri = f'{DriverType.ADBC.value}'
         if not ssl:
             uri = uri.replace('+tls', '')
-        uri = f'{uri}data.{region.value}.dremio.cloud:443'
+        uri = f'{uri}data.{region.value}dremio.cloud:443'
         kw = {
             adbc.DatabaseOptions.AUTHORIZATION_HEADER.value: f'Bearer {pat}',
             adbc.DatabaseOptions.TLS_SKIP_VERIFY.value: "false" if disableVerification else "true",
