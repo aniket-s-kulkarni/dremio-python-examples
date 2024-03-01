@@ -8,13 +8,8 @@ This repository is a collection of python based examples that connect to and int
 
 ## Prerequisites
 
-1. Python version
-
-Python version >= 3.0 is required to use these examples
-
-2. Libraries
-
-[jaydebeapi](https://pypi.org/project/JayDeBeApi/) and [apache adbc](https://arrow.apache.org/adbc/main/python/driver_manager.html#installation) are the two prerequisites. To install them run - 
+1. **Python version**: Python version >= 3.0 is required to use these examples
+2. **Libraries**: [jaydebeapi](https://pypi.org/project/JayDeBeApi/) and [apache adbc](https://arrow.apache.org/adbc/main/python/driver_manager.html#installation) are the two prerequisites. To install them run - 
 
 ```sh
 python3 -m pip install -r requirements.txt
