@@ -60,7 +60,7 @@ with conn.cursor() as cur:
     ...
 ```
 
-Or integrate directly with pandas (Refer to [Examples](Examples.ipynb) for more details)
+Or integrate directly with pandas (Refer to [Examples](ConnectionExamples.ipynb) for more details)
 
 ## Notebook
 
