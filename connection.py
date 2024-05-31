@@ -16,7 +16,7 @@ class DriverType(enum.Enum):
 
 class Region(enum.Enum):
     NA = ""
-    EU = "prodemea."
+    EU = "eu."
 
 
 class ConnectionParams(dict):
@@ -65,7 +65,7 @@ class AdbcConnectionParams(ConnectionParams):
     """
     Connect using apache ADBC
     """
-    def __init__(self, region: Region, pat: str, ssl=True, disableVerification=False):
+    def __init__(self, region: Region, pat: str, ssl=True, disableVerification=False, project_id=None):
         uri = f'{DriverType.ADBC.value}'
         if not ssl:
             uri = uri.replace('+tls', '')
@@ -75,6 +75,10 @@ class AdbcConnectionParams(ConnectionParams):
             adbc.DatabaseOptions.TLS_SKIP_VERIFY.value: "false" if disableVerification else "true",
             f'{adbc.DatabaseOptions.RPC_CALL_HEADER_PREFIX.value}useEncryption': "true" if ssl else "false",
         }
+        if project_id:
+            cookie = f'{adbc.DatabaseOptions.RPC_CALL_HEADER_PREFIX.value}Cookie'
+            kw[cookie] = f'project_id={project_id}'
+            print(f'k = {cookie}, v = {kw[cookie]}')
         super().__init__(uri, **kw)
 
     def connect(self) -> dbapi.Connection:
