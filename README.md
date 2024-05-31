@@ -64,4 +64,4 @@ Or integrate directly with pandas (Refer to [Examples](ConnectionExamples.ipynb)
 
 ## Notebook
 
-Refer to [Examples](Examples.ipynb) for more details
+Refer to [Examples](ConnectionExamples.ipynb) for more details
