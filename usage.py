@@ -6,7 +6,7 @@ import typing
 import os
 
 PAT = os.environ.get("DREMIO_PAT", "")
-DREMIO_URL = "dev.dremio.site"
+DREMIO_URL = "dremio.cloud" # or prodemea.dremio.cloud for EMEA region
 
 
 def get_projects() -> typing.List[typing.Dict[str, str]]:
