@@ -76,9 +76,7 @@ class AdbcConnectionParams(ConnectionParams):
             f'{adbc.DatabaseOptions.RPC_CALL_HEADER_PREFIX.value}useEncryption': "true" if ssl else "false",
         }
         if project_id:
-            cookie = f'{adbc.DatabaseOptions.RPC_CALL_HEADER_PREFIX.value}Cookie'
-            kw[cookie] = f'project_id={project_id}'
-            print(f'k = {cookie}, v = {kw[cookie]}')
+            kw[f'{adbc.DatabaseOptions.RPC_CALL_HEADER_PREFIX.value}Cookie'] = f'project_id={project_id}'
         super().__init__(uri, **kw)
 
     def connect(self) -> dbapi.Connection:
